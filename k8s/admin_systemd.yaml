@@ -4,7 +4,7 @@ localAPIEndpoint:
   advertiseAddress: 192.168.1.11
   bindPort: 6443
 nodeRegistration:
-  criSocket: /run/containerd/containerd.sock
+  criSocket: unix:///run/containerd/containerd.sock
   name: master-01
   taints:
   - effect: NoSchedule
@@ -54,5 +54,3 @@ evictionHard:
     nodefs.available: "5%"
     nodefs.inodesFree: "5%"
     imagefs.available: "5%"
-
-
