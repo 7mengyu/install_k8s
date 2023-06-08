@@ -1,0 +1,10 @@
+registry.aliyuncs.com/google_containers/kube-apiserver:v1.26.5
+registry.aliyuncs.com/google_containers/kube-controller-manager:v1.26.5
+registry.aliyuncs.com/google_containers/kube-scheduler:v1.26.5
+registry.aliyuncs.com/google_containers/kube-proxy:v1.26.5
+registry.aliyuncs.com/google_containers/pause:3.9
+registry.aliyuncs.com/google_containers/etcd:3.5.6-0
+registry.aliyuncs.com/google_containers/coredns:v1.9.3
+docker.io/flannel/flannel:v0.22.0
+docker.io/flannel/flannel-cni-plugin:v1.1.2
+docker.io/flannel/flannel:v0.22.0
