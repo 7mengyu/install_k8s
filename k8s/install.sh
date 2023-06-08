@@ -59,6 +59,10 @@ function get_images() {
   for i in $(cat ./images/images.txt);do nerdctl pull $i >/dev/null ;done
 }
 
+function set_crictl() {
+  crictl config runtime-endpoint unix:///run/containerd/containerd.sock
+}
+
 function main() {
 
   echo "开始执行install_kubexx..."
@@ -73,14 +77,9 @@ function main() {
   echo "开始安装网络插件"
   kubectl create -f flannel/kube-flannel.yml
   kubectl cluster-info
-#  echo "开始安装ingress-nginx"
-#  kubectl apply -f ingress-nginx/deploy.yaml
+  echo "配置crictl使用containerd"
+  set_crictl
 }
-
-
-
-
-
 
 
 main
