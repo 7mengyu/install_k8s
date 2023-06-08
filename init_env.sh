@@ -18,7 +18,7 @@ function init_env() {
   [ ! -f /etc/selinux/config.scy.bak ] && cp -a /etc/selinux/config /etc/selinux/config.scy.bak
   sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
   echo "  转发 IPv4 并让 iptables 看到桥接流量"
-  cat <<EOF | tee /etc/modules-load.d/python调用k8s接口.conf
+  cat <<EOF | tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
 EOF
@@ -27,7 +27,7 @@ EOF
   modprobe br_netfilter
 
   echo "  设置所需的 sysctl 参数，参数在重新启动后保持不变"
-  cat <<EOF | tee /etc/sysctl.d/python调用k8s接口.conf
+  cat <<EOF | tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward                 = 1
@@ -35,6 +35,9 @@ EOF
 
   echo "  应用 sysctl 参数而不重新启动"
   sysctl --system
+
+  # 添加解析
+  echo "192.168.1.11 master-01"  >> /etc/hosts
 
 }
 
