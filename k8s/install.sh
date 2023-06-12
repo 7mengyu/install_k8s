@@ -49,7 +49,7 @@ function install_kubexx() {
     echo "kubelet is not installed"
   fi
 
-  rpm -ivh  ./package/*.rpm
+  rpm -ivh --force  ./package/*.rpm
   # 设置kubelet开机自启动
   systemctl disable kubelet
   systemctl enable --now kubelet
