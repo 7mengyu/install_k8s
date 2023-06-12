@@ -16,20 +16,21 @@ fi
 # 全量直接安装
 function install_full_containerd() {
   # check dockerd
-  if [ $(echo "quit" | which dockerd 2>/dev/null |grep -cwi "no") -eq 0 ]
+  if echo "quit" | which dockerd >/dev/null 2>&1
   then
-       echo "dockerd is not installed"
+    echo "dockerd is installed, uninstall it first"
+    exit -1
   else
-      echo "dockerd is installed, uninstall it first"
-      exit -1
+    echo "Docker is not installed"
   fi
+
   # check podman
-   if [ $(echo "quit" | which podman 2>/dev/null |grep -cwi "no") -eq 0 ]
+  if echo "quit" | which podman >/dev/null 2>&1
   then
-       echo "podman is not installed"
+    echo "podman is installed, uninstall it first"
+    exit -1
   else
-      echo "podman is installed, uninstall it first"
-      exit -1
+      echo "podman is not installed"
   fi
 
   find ./package -name  nerdctl-full-\*-linux-${cpu_info}.tar.gz | xargs -I {} tar Cxzvf /usr/local {} > /dev/null
