@@ -25,26 +25,28 @@ function init_cluster() {
 
 function install_kubexx() {
   # 检查是否已安装
-  if [ $(echo "quit" | which kubeadm 2>/dev/null |grep -cwi "no") -eq 0 ]
+  if echo "quit" | which kubeadm >/dev/null 2>&1
   then
-       echo "kubeadm is not installed"
+    echo "kubeadm is installed, uninstall it first"
+    exit -1
   else
-      echo "kubeadm is installed, uninstall it first"
-      exit -1
+    echo "kubeadm is not installed"
   fi
-  if [ $(echo "quit" | which kubectl 2>/dev/null |grep -cwi "no") -eq 0 ]
+
+  if echo "quit" | which kubectl >/dev/null 2>&1
   then
-       echo "kubectl is not installed"
+    echo "kubectl is installed, uninstall it first"
+    exit -1
   else
-      echo "kubectl is installed, uninstall it first"
-      exit -1
+    echo "kubectl is not installed"
   fi
-  if [ $(echo "quit" | which kubelet 2>/dev/null |grep -cwi "no") -eq 0 ]
+
+  if echo "quit" | which kubelet >/dev/null 2>&1
   then
-       echo "kubelet is not installed"
+    echo "kubelet is installed, uninstall it first"
+    exit -1
   else
-      echo "kubelet is installed, uninstall it first"
-      exit -1
+    echo "kubelet is not installed"
   fi
 
   rpm -ivh  ./package/*.rpm
@@ -83,4 +85,3 @@ function main() {
 
 
 main
-
